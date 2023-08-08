@@ -1,9 +1,13 @@
+#include <LiquidCrystal.h> 
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
 #include <dht11.h>
 dht11 DHT11;
 
 #define DHT11PIN 7
 
 void setup() {
+  lcd.begin(16, 2);
   Serial.begin(9600);
   Serial.println("Program testowy DHT11");
   Serial.println();
@@ -28,10 +32,29 @@ void loop() {
     Serial.println("Nieznany błąd\t"); 
     break;
   }
+
+  float humidity = DHT11.humidity;
+  float temperature = DHT11.temperature;
+  
   Serial.print("Wilgotnosc (%): ");              //wyświetlenie wartości wilgotności
-  Serial.print((float)DHT11.humidity, 2);
+  Serial.print(humidity, 2);
   Serial.print("\t");
   Serial.print("Temperatura (C): ");           //wyświetlenie temperatury
-  Serial.println((float)DHT11.temperature, 2);
-  delay(5000);
+  Serial.println(temperature, 2);
+
+  lcd.setCursor(0,0); 
+  lcd.clear();
+  lcd.print("Temp: ");
+  lcd.print(temperature);
+  lcd.print((char)223);
+  lcd.print("C");
+
+  lcd.setCursor(0,1);
+  lcd.print("Humidity: ");
+  lcd.print(humidity);
+  lcd.print("%");
+  
+  delay(1000);
+  lcd.setCursor(0, 0);
+  lcd.clear();
 }
