@@ -20,12 +20,33 @@ Stepper stepper(steps, 8, 10, 9, 11);
 
 // the previous reading from the analog input
 int previous = 0;
+int button = 0;
 
 void setup() {
-  // set the speed of the motor to 30 RPMs
-  stepper.setSpeed(10);
-  stepper.step(2048);
+  pinMode(7, INPUT_PULLUP);
+  Serial.begin(9600);
 }
 
 void loop() {
+
+  int sensorVal = digitalRead(7);
+  stepper.setSpeed(5);
+  stepper.step(512);
+
+  if (digitalRead(7) == HIGH) {
+    button = 1;
+  }
+
+  if (digitalRead(7) == LOW) {
+    button = 0;
+  }
+
+  if (button == 1) {
+    stepper.step(-512);
+  } else {
+    stepper.step(512);
+  }
+
+  Serial.print(" buttonz: "); 
+  Serial.println(sensorVal);
 }
