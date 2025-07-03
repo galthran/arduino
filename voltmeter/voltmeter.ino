@@ -47,7 +47,10 @@ void loop() {
 
   l1_voltage = voltageSensor.getRmsVoltage();
 
-  // zmpt101b1_value = analogRead(A0);
+  zmpt101b1_value = analogRead(A0);
+  Serial.print("analogRead: ");
+  Serial.println(zmpt101b1_value);
+
   // l1_voltage = zmpt101b1_value * (5.0/1024.0);
   // Serial.println(l1_voltage);
 
@@ -66,8 +69,8 @@ void loop() {
   // }
 
   String line1 = "L1:" + String(l1_voltage) + "V";
-  String line2 = "L2:" + String(l2_voltage) + "V";
-  String line3 = "L3:" + String(l3_voltage) + "V";
+  //String line2 = "L2:" + String(l2_voltage) + "V";
+  //String line3 = "L3:" + String(l3_voltage) + "V";
 
   // Display Text
   display.clearDisplay();
