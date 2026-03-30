@@ -9,7 +9,7 @@ const int chipSelect = 10;
 void setup() {
   Serial.begin(9600);
 
-  Serial.print("Initializing SD card...");
+  Serial.println("Initializing SD card...");
 
   if (!SD.begin()) {
     Serial.println("initialization failed!");
